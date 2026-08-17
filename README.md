@@ -1,311 +1,291 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Retail Sales Analysis – Project Write-Up</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+# 📊 Retail Sales Analysis – Excel Dashboard
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+> **A full-year retail sales analysis built with Microsoft Excel to uncover revenue trends, product performance, customer concentration, and geographic sales patterns.**
 
-  :root {
-    --ink:      #1a1d23;
-    --muted:    #5a6070;
-    --accent:   #1d6fa4;
-    --accent2:  #e8f3fb;
-    --rule:     #d4dae3;
-    --bg:       #f7f9fc;
-    --card:     #ffffff;
-    --green:    #1a7a4a;
-    --green-bg: #eaf5ef;
-  }
+---
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.7;
-    padding: 48px 24px 80px;
-  }
+## 📌 Project Overview
 
-  .wrapper {
-    max-width: 860px;
-    margin: 0 auto;
-  }
+This project analyzes a full year of retail transaction data to understand **sales performance, customer behavior, product demand, and geographic revenue distribution**.
 
-  /* ── Header ── */
-  .eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
+The raw transaction data was cleaned, transformed, analyzed, and visualized using **Microsoft Excel**, with PivotTables and PivotCharts used to turn thousands of transaction records into meaningful business insights.
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 46px);
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
+The objective was not simply to create a dashboard, but to answer practical business questions such as:
 
-  h1 span {
-    color: var(--accent);
-  }
+* Which months generate the most revenue?
+* Which products contribute the most to sales?
+* Who are the highest-value customers?
+* Which countries generate the most revenue?
+* Where are the major opportunities and risks in the business?
 
-  .intro {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 680px;
-    margin-bottom: 36px;
-    border-left: 3px solid var(--accent);
-    padding-left: 16px;
-  }
+---
 
-  hr.rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 36px 0;
-  }
+## 🎯 Business Objectives
 
-  /* ── Tools badge row ── */
-  .tools-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
+The analysis was designed to:
 
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 40px;
-  }
+1. Evaluate overall retail revenue performance.
+2. Identify monthly and seasonal sales trends.
+3. Determine the highest-performing products.
+4. Identify the most valuable customers.
+5. Compare revenue performance across countries.
+6. Highlight areas of concentration, risk, and potential growth.
+7. Present the findings through an interactive and easy-to-understand Excel dashboard.
 
-  .badge {
-    background: var(--accent2);
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid #b8d9f0;
-  }
+---
 
-  /* ── Section headings ── */
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--ink);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--rule);
-  }
+## 🛠️ Tools & Techniques
 
-  /* ── Screenshot cards ── */
-  .screenshot-card {
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.05);
-  }
+| Tool / Technique    | Application                            |
+| ------------------- | -------------------------------------- |
+| **Microsoft Excel** | Data analysis and visualization        |
+| **Power Query**     | Data cleaning and transformation       |
+| **PivotTables**     | Aggregation and analysis               |
+| **PivotCharts**     | Visual representation of findings      |
+| **Data Cleaning**   | Preparation of raw transaction records |
+| **Excel Formulas**  | Calculations and derived metrics       |
 
-  .screenshot-card img {
-    width: 100%;
-    display: block;
-  }
+---
 
-  .screenshot-card figcaption {
-    padding: 10px 16px;
-    font-size: 13px;
-    color: var(--muted);
-    border-top: 1px solid var(--rule);
-    background: #fafbfc;
-    font-style: italic;
-  }
+## 📈 Key Performance Indicators
 
-  /* ── Insights ── */
-  .insights {
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    padding: 28px 32px;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.05);
-  }
+| KPI                      |        Result |
+| ------------------------ | ------------: |
+| 💰 Total Revenue         |    **$7.78M** |
+| 🌍 Countries Analyzed    |         **6** |
+| 📅 Analysis Period       | **12 Months** |
+| 👥 Top Customers Tracked |        **10** |
 
-  .insights ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+---
 
-  .insights ul li {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    font-size: 15px;
-    line-height: 1.6;
-  }
+# 📊 Dashboard & Analysis
 
-  .bullet-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--green-bg);
-    color: var(--green);
-    font-size: 14px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-  }
+## 1. Monthly Revenue Performance
 
-  strong.highlight { color: var(--accent); }
+![Monthly Total Revenue](Monthly_total_Revenue.JPG)
 
-  /* ── Summary stat strip ── */
-  .stat-strip {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
-  }
+### Key Finding
 
-  .stat-box {
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    padding: 20px 18px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,.04);
-  }
+Revenue performance varied considerably throughout the year, with **November recording the highest monthly revenue at approximately $1.22M**.
 
-  .stat-box .number {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    color: var(--accent);
-    font-weight: 700;
-  }
+The early months, particularly January and February, recorded comparatively weaker performance.
 
-  .stat-box .label {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-</style>
-</head>
-<body>
-<div class="wrapper">
+### Business Implication
 
-  <!-- ── Header ── -->
-  <p class="eyebrow">Data Analytics Project</p>
-  <h1>Retail Sales <span>Performance Analysis</span></h1>
-  <p class="intro">
-    This project analyses a full year of retail transaction data across multiple countries and customer segments, uncovering revenue trends, top-performing products, and high-value customers. Raw invoice records were cleaned, transformed, and visualised entirely within Excel — turning thousands of rows into actionable business intelligence through structured pivot analysis.
-  </p>
+The strong performance toward the end of the year suggests a significant seasonal component to demand.
 
-  <!-- ── Key stats ── -->
-  <div class="stat-strip">
-    <div class="stat-box">
-      <div class="number">$7.78M</div>
-      <div class="label">Total Revenue</div>
-    </div>
-    <div class="stat-box">
-      <div class="number">6</div>
-      <div class="label">Countries</div>
-    </div>
-    <div class="stat-box">
-      <div class="number">10</div>
-      <div class="label">Top Customers Tracked</div>
-    </div>
-    <div class="stat-box">
-      <div class="number">12 mo.</div>
-      <div class="label">Period Covered</div>
-    </div>
-  </div>
+Businesses could use this insight to:
 
-  <!-- ── Tools ── -->
-  <p class="tools-label">Tools Used</p>
-  <div class="badges">
-    <span class="badge">Microsoft Excel</span>
-    <span class="badge">PivotTables</span>
-    <span class="badge">Power Query</span>
-    <span class="badge">PivotCharts</span>
-    <span class="badge">Data Cleaning</span>
-  </div>
+* Increase inventory ahead of peak periods.
+* Prepare targeted seasonal marketing campaigns.
+* Optimize staffing and fulfilment capacity.
+* Monitor stock levels for high-demand products.
 
-  <hr class="rule">
+---
 
-  <!-- ── Screenshots ── -->
-  <h2>Monthly Total Revenue</h2>
-  <figure class="screenshot-card">
-    <img src="Monthly_total_Revenue.JPG" alt="Monthly Total Revenue chart showing bar chart by month">
-    <figcaption>Fig 1 – Monthly revenue pivot table and bar chart. November peaks at $1.22M; early months (Jan–Feb) are the weakest.</figcaption>
-  </figure>
+## 2. Top Products by Revenue & Quantity
 
-  <h2>Top Products by Revenue &amp; Quantity</h2>
-  <figure class="screenshot-card">
-    <img src="Top_project.JPG" alt="Top products pivot table showing revenue and quantity side by side">
-    <figcaption>Fig 2 – Top 10 products ranked by total revenue and quantity sold. WHITE HANGING HEART T-LIGHT HOLDER leads in revenue at £81,188.</figcaption>
-  </figure>
+![Top Products](Top_project.JPG)
 
-  <h2>Raw Sales Data</h2>
-  <figure class="screenshot-card">
-    <img src="sales.JPG" alt="Raw sales transaction data showing invoice records">
-    <figcaption>Fig 3 – Cleaned transaction-level dataset with InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country, and Total Revenue columns.</figcaption>
-  </figure>
+### Key Finding
 
-  <h2>Top 10 Customers by Revenue</h2>
-  <figure class="screenshot-card">
-    <img src="Top_10_customers.JPG" alt="Top 10 customers bar chart with CustomerID and total revenue">
-    <figcaption>Fig 4 – Customer ID 16251 is the single highest-value customer, generating $1.34M — more than 6× the second-ranked customer.</figcaption>
-  </figure>
+**WHITE HANGING HEART T-LIGHT HOLDER** was one of the strongest-performing products, generating approximately **£81,188 in revenue across 28,648 units sold**.
 
-  <h2>Sales by Country</h2>
-  <figure class="screenshot-card">
-    <img src="Sales_by_coubtry.JPG" alt="Sales by country pivot table and horizontal bar chart">
-    <figcaption>Fig 5 – United Kingdom dominates at $6.54M (88% of total revenue), followed by EIRE at $220K and Germany at $191K.</figcaption>
-  </figure>
+### Business Implication
 
-  <hr class="rule">
+Products with consistently high sales volume should receive particular attention during:
 
-  <!-- ── Insights ── -->
-  <h2>Key Insights</h2>
-  <div class="insights">
-    <ul>
-      <li>
-        <span class="bullet-icon">1</span>
-        <span><strong class="highlight">Q4 drove the biggest revenue spike</strong> — November alone reached $1.22M, making it the highest single month of the year, likely driven by holiday gifting demand. December remained strong at $1.0M, suggesting a concentrated seasonal sales window that warrants dedicated inventory and marketing preparation.</span>
-      </li>
-      <li>
-        <span class="bullet-icon">2</span>
-        <span><strong class="highlight">Customer 16251 is a critical account</strong> — contributing $1.34M out of the $2.18M tracked across the top 10 customers (~62%). This level of concentration represents both an opportunity (nurture the relationship) and a risk (over-reliance on a single buyer).</span>
-      </li>
-      <li>
-        <span class="bullet-icon">3</span>
-        <span><strong class="highlight">WHITE HANGING HEART T-LIGHT HOLDER leads product revenue</strong> at £81,188 across 28,648 units, indicating strong, steady demand. It should be prioritised in stock forecasting and could anchor bundling or upsell strategies.</span>
-      </li>
-      <li>
-        <span class="bullet-icon">4</span>
-        <span><strong class="highlight">The United Kingdom accounts for ~88% of total revenue</strong> ($6.54M of $7.39M), while EIRE, Germany, France, Netherlands, and Australia together contribute just 12%. International markets remain largely untapped, presenting a clear growth opportunity if logistics and localisation challenges are addressed.</span>
-      </li>
-    </ul>
-  </div>
+* Inventory forecasting
+* Reordering
+* Promotional campaigns
+* Product bundling
+* Cross-selling strategies
 
-</div>
-</body>
-</html>
+---
+
+## 3. Raw Sales Dataset
+
+![Raw Sales Data](sales.JPG)
+
+The analysis began with transaction-level sales data containing fields such as:
+
+* `InvoiceNo`
+* `StockCode`
+* `Description`
+* `Quantity`
+* `InvoiceDate`
+* `UnitPrice`
+* `CustomerID`
+* `Country`
+* `Total Revenue`
+
+The dataset was prepared for analysis before being summarized through PivotTables and visualized through charts.
+
+---
+
+## 4. Top 10 Customers by Revenue
+
+![Top 10 Customers](Top_10_customers.JPG)
+
+### Key Finding
+
+**Customer 16251** was the highest-value customer, generating approximately **$1.34M** in revenue.
+
+This represents a substantial share of the revenue generated by the top 10 customers.
+
+### Business Implication
+
+High customer concentration creates both an **opportunity and a risk**.
+
+The opportunity is to strengthen relationships with high-value customers through retention and personalized offers.
+
+The risk is revenue dependency. Losing a major customer could have a significant impact on overall sales performance.
+
+---
+
+## 5. Sales by Country
+
+![Sales by Country](Sales_by_coubtry.JPG)
+
+### Key Finding
+
+The **United Kingdom** was the dominant market, generating approximately **$6.54M** in revenue.
+
+Other markets, including EIRE, Germany, France, the Netherlands, and Australia, contributed a significantly smaller proportion of total revenue.
+
+### Business Implication
+
+The strong dependence on the UK market suggests potential opportunities for international expansion.
+
+Before expanding, the business should evaluate:
+
+* Customer demand
+* Shipping and fulfilment costs
+* Market-specific preferences
+* Pricing
+* Competition
+* Local marketing strategies
+
+---
+
+# 🔍 Key Insights
+
+### 01 — Strong Seasonal Revenue Pattern
+
+**November was the strongest month**, reaching approximately **$1.22M in revenue**.
+
+This suggests that seasonal demand may play an important role in overall business performance.
+
+---
+
+### 02 — Significant Customer Concentration
+
+Customer **16251 generated approximately $1.34M**, making the customer one of the most significant contributors among the top 10 accounts.
+
+This highlights the importance of customer retention while also demonstrating the potential risk of relying heavily on a small number of high-value customers.
+
+---
+
+### 03 — High-Demand Product Opportunity
+
+**WHITE HANGING HEART T-LIGHT HOLDER** generated approximately **£81,188 from 28,648 units sold**.
+
+Its strong combination of sales volume and revenue makes it a product worth monitoring closely for inventory planning and promotional opportunities.
+
+---
+
+### 04 — UK Market Dominance
+
+The UK generated approximately **$6.54M**, representing the majority of overall revenue.
+
+This demonstrates strong performance in the core market but also highlights the potential for diversification into other geographic markets.
+
+---
+
+# 💡 Business Recommendations
+
+Based on the analysis, the following actions could improve future performance:
+
+### 📦 1. Prepare for Seasonal Demand
+
+Increase inventory and operational capacity ahead of historically strong months, particularly toward the end of the year.
+
+### 👥 2. Strengthen Customer Retention
+
+Develop targeted retention strategies for high-value customers while gradually reducing dependence on a small number of accounts.
+
+### 🛍️ 3. Prioritize High-Performing Products
+
+Maintain adequate inventory for products with consistently high demand and explore bundling and cross-selling opportunities.
+
+### 🌍 4. Explore International Growth
+
+Investigate lower-performing international markets to determine whether localized pricing, marketing, or distribution could increase revenue.
+
+### 📊 5. Continue Monitoring Performance
+
+Use the dashboard as a recurring management tool rather than a one-time report, allowing changes in sales performance to be identified early.
+
+---
+
+# 🧠 Analytical Approach
+
+The project followed a structured data analytics workflow:
+
+**Raw Data → Data Cleaning → Transformation → Analysis → Visualization → Insights → Recommendations**
+
+This approach helped transform transaction-level records into information that can support business decision-making.
+
+---
+
+# 📁 Project Files
+
+| File                          | Description                       |
+| ----------------------------- | --------------------------------- |
+| `Retail_Sales_Dashboard.xlsx` | Main Excel analysis and dashboard |
+| `sales.JPG`                   | Raw/cleaned dataset preview       |
+| `Monthly_total_Revenue.JPG`   | Monthly revenue analysis          |
+| `Top_project.JPG`             | Top product analysis              |
+| `Top_10_customers.JPG`        | Customer revenue analysis         |
+| `Sales_by_coubtry.JPG`        | Geographic sales analysis         |
+
+---
+
+# 📚 What This Project Demonstrates
+
+This project demonstrates practical skills in:
+
+* Data cleaning
+* Data transformation
+* Exploratory data analysis
+* Excel PivotTables
+* PivotCharts
+* KPI analysis
+* Business intelligence
+* Customer analysis
+* Product performance analysis
+* Geographic analysis
+* Data storytelling
+* Business recommendations
+
+---
+
+## 🚀 Conclusion
+
+The analysis demonstrates how raw retail transaction data can be transformed into actionable business intelligence using Excel.
+
+The findings reveal **strong seasonal sales patterns, significant customer concentration, high-performing products, and heavy dependence on the UK market**.
+
+More importantly, the project moves beyond simply reporting numbers by connecting the analysis to **business decisions around inventory, customer retention, product strategy, and market expansion**.
+
+---
+
+### 👤 Author
+
+**Akinrolayo Faith Emmanuel**
+
+*Data Analyst | Embryology & Reproductive Health | Healthcare Analytics*
+
+---
+
+⭐ **If you found this project useful, feel free to explore the repository and the Excel dashboard.**
